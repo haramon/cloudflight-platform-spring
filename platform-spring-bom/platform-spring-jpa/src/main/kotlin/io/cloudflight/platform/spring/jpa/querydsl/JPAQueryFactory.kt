@@ -11,7 +11,7 @@ internal class JPAQueryFactory(
 ) : com.querydsl.jpa.JPQLQueryFactory by jpaQueryFactory, JPQLQueryFactory {
 
     override fun from(from: EntityPath<*>, pageable: Pageable): JPQLQuery<*> {
-        val domainClass = from.annotatedElement as? Class<*> ?: throw ClassCastException("TODO") // TODO here
+        val domainClass = from.annotatedElement as Class<*>
         return this.from(from).applyPagination(pageable, domainClass)
     }
 
