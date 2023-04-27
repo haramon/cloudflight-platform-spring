@@ -1,0 +1,6 @@
+package io.cloudflight.platform.spring.jpa.autoconfigure
+
+import org.springframework.boot.autoconfigure.SpringBootApplication
+
+@SpringBootApplication
+internal class AutoConfigureTestApplication

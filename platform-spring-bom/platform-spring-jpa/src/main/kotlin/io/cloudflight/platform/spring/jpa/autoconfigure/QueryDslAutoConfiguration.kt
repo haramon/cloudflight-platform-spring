@@ -2,7 +2,6 @@ package io.cloudflight.platform.spring.jpa.autoconfigure
 
 import com.querydsl.jpa.JPQLQueryFactory
 import com.querydsl.jpa.JPQLTemplates
-import com.querydsl.jpa.impl.JPAQueryFactory
 import jakarta.persistence.EntityManager
 import org.springframework.boot.autoconfigure.AutoConfiguration
 import io.cloudflight.platform.spring.jpa.querydsl.JPAQueryFactory

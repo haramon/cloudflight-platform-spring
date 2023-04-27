@@ -73,3 +73,4 @@ testresources-client = { module = "io.cloudflight.testresources.springboot:sprin
 testresources-azurite = { module = "io.cloudflight.testresources.springboot:springboot-testresources-azurite", version.ref = "springboot-testresources" }
 testresources-rabbitmq = { module = "io.cloudflight.testresources.springboot:springboot-testresources-rabbitmq", version.ref = "springboot-testresources" }
 testresources-redis = { module = "io.cloudflight.testresources.springboot:springboot-testresources-redis", version.ref = "springboot-testresources" }
+testresources-jdbc-mariadb = { module = "io.cloudflight.testresources.springboot:springboot-testresources-jdbc-mariadb", version.ref = "springboot-testresources" }

@@ -2,20 +2,22 @@ package io.cloudflight.platform.spring.jpa.querydsl
 
 import com.querydsl.core.types.EntityPath
 import com.querydsl.jpa.JPQLQuery
+import jakarta.persistence.EntityManager
 import org.springframework.data.domain.Pageable
-import javax.persistence.EntityManager
+import org.springframework.data.domain.Sort
 
 internal class JPAQueryFactory(
-    private val jpaQueryFactory: com.querydsl.jpa.JPQLQueryFactory,
+    private val jpqlQueryFactory: com.querydsl.jpa.JPQLQueryFactory,
     private val entityManager: EntityManager,
-) : com.querydsl.jpa.JPQLQueryFactory by jpaQueryFactory, JPQLQueryFactory {
+) : com.querydsl.jpa.JPQLQueryFactory by jpqlQueryFactory, JPQLQueryFactory {
 
     override fun from(from: EntityPath<*>, pageable: Pageable): JPQLQuery<*> {
         val domainClass = from.annotatedElement as Class<*>
-        return this.from(from).applyPagination(pageable, domainClass)
+        return JPQLPageableQuery(this.from(from), entityManager).applyPagination(pageable, domainClass)
     }
 
-    private fun <T> JPQLQuery<T>.applyPagination(pageable: Pageable, domainClass: Class<*>): JPQLQuery<T> {
-        return JPQLPageableQuery(this, entityManager).applyPagination(pageable, domainClass)
+    override fun from(from: EntityPath<*>, sort: Sort): JPQLQuery<*> {
+        val domainClass = from.annotatedElement as Class<*>
+        return JPQLSortableQuery(this.from(from), entityManager).applySorting(sort, domainClass)
     }
 }

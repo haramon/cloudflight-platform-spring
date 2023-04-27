@@ -1,3 +1,7 @@
+plugins{
+    id("io.micronaut.test-resources")
+}
+
 dependencies {
     api project(':platform-spring-bom:platform-spring-context')
 
@@ -18,7 +22,16 @@ dependencies {
     // Spring Data JPA requires the Kotlin-Reflect classes at runtime
     runtimeOnly('org.jetbrains.kotlin:kotlin-reflect')
 
-    compileOnly('com.querydsl:querydsl-jpa::jakarta')
+    api('com.querydsl:querydsl-jpa::jakarta')
 
     kapt 'org.springframework.boot:spring-boot-configuration-processor'
+
+    testImplementation project(':platform-spring-test-bom:platform-spring-test')
+    testImplementation project(':platform-spring-test-bom:platform-spring-test-testcontainers')
+
+//
+//    testImplementation 'org.springframework.boot:spring-boot-starter-security'
+//    testImplementation 'org.springframework.boot:spring-boot-starter-web'
+
+    testResourcesImplementation libs.testresources.jdbc.mariadb
 }

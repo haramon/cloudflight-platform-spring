@@ -18,7 +18,7 @@ class JpaAutoConfiguration {
     }
 
     @Bean
-    fun sessionFactoryOptionsBuilder(
+    internal fun sessionFactoryOptionsBuilder(
         serviceRegistry: StandardServiceRegistry,
         context: BootstrapContext,
         properties: JpaConfigurationProperties,

@@ -2,25 +2,25 @@ package io.cloudflight.platform.spring.jpa.querydsl
 
 import com.querydsl.core.types.dsl.PathBuilderFactory
 import com.querydsl.jpa.JPQLQuery
-import org.springframework.data.domain.Pageable
-import org.springframework.data.jpa.repository.support.Querydsl
 import jakarta.persistence.EntityManager
+import org.springframework.data.domain.Sort
+import org.springframework.data.jpa.repository.support.Querydsl
 
-internal class JPQLPageableQuery<T>(
+internal class JPQLSortableQuery<T>(
     private val jpqlQuery: JPQLQuery<T>,
     private val entityManager: EntityManager,
 ) : JPQLQuery<T> by jpqlQuery {
 
     /**
-     * Applies the given [pageable] to the [jpqlQuery].
+     * Applies the given [sort] to the [jpqlQuery].
      *
-     * @param pageable
+     * @param sort
      * @return the JPQLQuery {@link JPQLQuery}.
      */
-    fun applyPagination(pageable: Pageable, domainClass: Class<*>): JPQLQuery<T> {
+    fun applySorting(sort: Sort, domainClass: Class<*>): JPQLQuery<T> {
         val pathBuilder = PathBuilderFactory().create(domainClass)
         val queryDsl = Querydsl(entityManager, pathBuilder)
 
-        return queryDsl.applyPagination(pageable, this)
+        return queryDsl.applySorting(sort, this)
     }
 }
